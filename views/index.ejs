@@ -8,14 +8,15 @@
 
 <h1>Home</h1>
 
-<ul>
+<div class="header">
 	<% newReleases.forEach(function(album){ %>
-		<li>
-			<h1><%= album.name %></h1>
-			<img src="<%= album.images[2].url %>" />
-		</li>
+		<div class="feature-song">
+			<h3><%= album.artists[0].name %></h3>
+			<img src="<%= album.images[1].url %>" />
+			<p><%= album.name %></p>
+		</div>
 	<% }) %>
-</ul>
+</div>
 
 <script type="text/javascript" src="./script/scripts.js"></script>
 </body>

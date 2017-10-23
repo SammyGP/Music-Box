@@ -1,0 +1,12 @@
+.header {
+  width: 100%;
+  height: 50vh; }
+  .header .feature-song {
+    width: 9%;
+    height: 100%;
+    display: inline-block; }
+    .header .feature-song img {
+      width: 100%;
+      height: auto; }
+
+/*# sourceMappingURL=main.css.map */
