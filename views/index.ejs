@@ -8,14 +8,34 @@
 
 <h1>Home</h1>
 
-<div class="header">
+<div class="header list-display">
 	<% newReleases.forEach(function(album){ %>
-		<div class="feature-song">
-			<h3><%= album.artists[0].name %></h3>
+		<div class="song-box">
 			<img src="<%= album.images[1].url %>" />
-			<p><%= album.name %></p>
+			<h3 class="artist"><%= album.artists[0].name %></h3>
+			<p class="song"><%= album.name %></p>
 		</div>
 	<% }) %>
+</div>
+
+<div class="form">
+	<h2>Song to search for</h2>	
+	<div class="submit-playlist list-display">
+	</div>
+</div>
+<div class="playlists">
+	<h2>My Playlists</h2>
+	<% userPlaylist.forEach(function(item){ %>
+		<div class="song-box playlist-box">
+			<% if(!item.images[0]){ %>
+				<img src="NONE %>" />
+			<% } else { %>
+				<img src="<%= item.images[0].url %>" />
+			<% } %>
+			<h3><%= item.name %></h3>
+			<p><%= item.tracks.total %> Tracks</p>
+		</div>
+	<% }); %>
 </div>
 
 <script type="text/javascript" src="./script/scripts.js"></script>

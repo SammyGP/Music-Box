@@ -19,7 +19,7 @@ app.get("/", function(req, res){
 
 		// get the new releases for the index header
 		var newReleases = {
-			url: "	https://api.spotify.com/v1/browse/new-releases?limit=10",
+			url: "https://api.spotify.com/v1/browse/new-releases?limit=10",
 			headers: {
 				"Authorization": "Bearer " + tokens.access_token,
 				"Accept": "application/json"
@@ -32,7 +32,25 @@ app.get("/", function(req, res){
 			} else {
 				//res.send(body);
 				var results = JSON.parse(body);
-				res.render("index", {newReleases: results.albums.items});
+
+				// when done request the user playlists
+				var userPlaylist = {
+					url: "https://api.spotify.com/v1/me/playlists?",
+					headers: {
+						"Authorization": "Bearer " + tokens.access_token,
+						"Accept": "application/json"
+					}
+				}
+				request(userPlaylist, function(e, r, b){
+					if(e){
+						console.log(e);
+					} else {
+						var playlistResult = JSON.parse(b);
+						res.render("index", {newReleases: results.albums.items, userPlaylist:playlistResult.items});
+					}
+				})
+
+				//res.render("index", {newReleases: results.albums.items});
 			}
 		})
 	} else {

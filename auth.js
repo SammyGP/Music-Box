@@ -17,6 +17,7 @@ router.get("/auth", function(req, res){
 	var authUrl = qs.stringify({
 		client_id: client_id,
 		response_type: "code",
+		scope: "playlist-read-private",
 		redirect_uri: "http://localhost:3000/callback",
 		show_dialog: true
 	})
