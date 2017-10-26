@@ -23,20 +23,27 @@
 	<div class="submit-playlist list-display">
 	</div>
 </div>
-<div class="playlists">
-	<h2>My Playlists</h2>
-	<% userPlaylist.forEach(function(item){ %>
-		<div class="song-box playlist-box">
-			<% if(!item.images[0]){ %>
-				<img src="NONE %>" />
-			<% } else { %>
-				<img src="<%= item.images[0].url %>" />
-			<% } %>
-			<h3><%= item.name %></h3>
-			<p><%= item.tracks.total %> Tracks</p>
-		</div>
-	<% }); %>
+<div class="my-playlists">
+	<button id="get-playlists">Show my playlists</button>
 </div>
+
+<h1> TESTING BELLOW </h1>
+	<% userPlaylist.forEach(function(item){ %>
+		<form>
+			<div class="playlist">
+				<% if(!item.images[0]){ %>
+					<img src="NONE %>" />
+				<% } else { %>
+					<img src="<%= item.images[0].url %>" />
+				<% } %>
+				<h3><%= item.name %></h3>
+				<p><%= item.tracks.total %> Tracks</p>
+				<input name="list-user" value="<%= item.owner.id %>">
+				<input name="list-id" value="<%= item.id %>">
+				<input class="submit" type="button" value="submit">
+			</div>
+		</form>
+	<% }); %>
 
 <script type="text/javascript" src="./script/scripts.js"></script>
 </body>

@@ -32,8 +32,13 @@ app.get("/", function(req, res){
 			} else {
 				//res.send(body);
 				var results = JSON.parse(body);
+				res.render("index", {newReleases: results.albums.items});
 
-				// when done request the user playlists
+
+/*****************************************************************************************************/
+				// old user playlist request
+				// when done request the user playlist
+				/*
 				var userPlaylist = {
 					url: "https://api.spotify.com/v1/me/playlists?",
 					headers: {
@@ -42,21 +47,58 @@ app.get("/", function(req, res){
 					}
 				}
 				request(userPlaylist, function(e, r, b){
-					if(e){
+					if(e) {
 						console.log(e);
 					} else {
 						var playlistResult = JSON.parse(b);
 						res.render("index", {newReleases: results.albums.items, userPlaylist:playlistResult.items});
 					}
 				})
-
-				//res.render("index", {newReleases: results.albums.items});
+				*/
+/****************************************************************************************************/
 			}
 		})
 	} else {
 		res.render("auth");
 	}
 });
+
+// gets all the tracks from the selected playlist and sends them to the frontend with a fetch request
+app.post("/playlist/:user/:id", function(req, res){
+	var userTracks = {
+		url: `https://api.spotify.com/v1/users/${req.params.user}/playlists/${req.params.id}`,
+		headers: {
+			"Authorization": "Bearer " + tokens.access_token,
+			"Accept": "application/json"
+		}
+	}
+	request(userTracks, function(err, response, body){
+		console.log(userTracks);
+		if(err) {
+			console.log(err);
+		} else {
+			var result = JSON.parse(body);
+
+			// needs to be a res.send for the fetch api to recieve
+			res.send(body);
+		}
+	})
+});
+
+app.get("/user/playlist", function(req, res){
+	var userPlaylist = {
+		url: "https://api.spotify.com/v1/me/playlists?",
+		headers: {
+			"Authorization": "Bearer " + tokens.access_token,
+			"Accept": "application/json"
+		}
+	}
+	request(userPlaylist, function(err, response, body){
+		var data = JSON.parse(body);
+		res.send(data);
+	})
+})
+
 
 
 // temporary endpoint just to view the json data
@@ -70,10 +112,12 @@ app.get("/data", function(req, res){
 	}
 	request(newReleases, function(err, response, body){
 		data = JSON.parse(body);
-		res.send(data);
 	})
 })
 
+
+// authentication 
+// if user is not authenticated (ie tokens.access_token is ==== 0) user from index will be redirected to /auth
 app.get("/auth", authRouter);
 app.get("/callback", authRouter)
 
