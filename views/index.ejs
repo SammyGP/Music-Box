@@ -7,7 +7,10 @@
 <body>
 
 <h1>Home</h1>
-
+<ul class="track-popup">
+	<span>Tracklist</span>
+	<span id="close">X</span>
+</ul>
 <div class="header list-display">
 	<% newReleases.forEach(function(album){ %>
 		<div class="song-box">
@@ -23,27 +26,10 @@
 	<div class="submit-playlist list-display">
 	</div>
 </div>
-<div class="my-playlists">
+<div class="user-playlists">
 	<button id="get-playlists">Show my playlists</button>
 </div>
 
-<h1> TESTING BELLOW </h1>
-	<% userPlaylist.forEach(function(item){ %>
-		<form>
-			<div class="playlist">
-				<% if(!item.images[0]){ %>
-					<img src="NONE %>" />
-				<% } else { %>
-					<img src="<%= item.images[0].url %>" />
-				<% } %>
-				<h3><%= item.name %></h3>
-				<p><%= item.tracks.total %> Tracks</p>
-				<input name="list-user" value="<%= item.owner.id %>">
-				<input name="list-id" value="<%= item.id %>">
-				<input class="submit" type="button" value="submit">
-			</div>
-		</form>
-	<% }); %>
 
 <script type="text/javascript" src="./script/scripts.js"></script>
 </body>

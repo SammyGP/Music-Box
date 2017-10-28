@@ -30,15 +30,52 @@
 	}
 }
 /* user playlists */
-.playlists {
+.user-playlists {
 	width:100%;
 	height:50vh;
-	overflow:scroll;
-	border:1px solid black;
-	.playlist-box {
+	text-align:center;
+	.user-playlist {
+		vertical-align:top;
 		display:inline-block;
 		width:25%;
 		height:100%;
 		border:1px solid black;
+		margin:5px;
+		img {
+			width:100%;
+			height:auto;
+		}
+		h2, p {
+			display:none;
+			margin-top:50%;
+		}
 	}
+	.user-playlist:hover {
+		img {
+			opacity:0.6;
+		}
+		h2, p {
+			color:red;
+			display:inline-block;
+			width:50%;
+			height:10%;
+			margin-top:50%;
+			z-index:100;
+		}
+	}
+}
+
+.track-popup {
+	position:absolute;
+	left:0;
+	right:0;
+	z-index:100;
+	margin:auto;
+	width:66%;
+	height:auto;
+	background-color:black;
+	color:white;
+	list-style:none;
+	overflow:scroll;
+
 }

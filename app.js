@@ -5,6 +5,9 @@ app 		   	= express(),
 request			= require("request"),
 auth 			= require("./auth"),
 authRouter		= auth.router,
+
+// not vialbe for release to have tokens like this
+// look inte pushing token to front end?
 tokens			= auth.tokens;
 
 
@@ -18,6 +21,7 @@ app.get("/", function(req, res){
 	if(tokens.access_token !== 0) {
 
 		// get the new releases for the index header
+		// TODO get new release playlist instead of new releas tracks
 		var newReleases = {
 			url: "https://api.spotify.com/v1/browse/new-releases?limit=10",
 			headers: {
@@ -64,7 +68,8 @@ app.get("/", function(req, res){
 });
 
 // gets all the tracks from the selected playlist and sends them to the frontend with a fetch request
-app.post("/playlist/:user/:id", function(req, res){
+app.get("/playlist/:user/:id", function(req, res){
+	console.log("get track route");
 	var userTracks = {
 		url: `https://api.spotify.com/v1/users/${req.params.user}/playlists/${req.params.id}`,
 		headers: {
