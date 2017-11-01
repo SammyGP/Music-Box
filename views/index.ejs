@@ -7,10 +7,11 @@
 <body>
 
 <h1>Home</h1>
-<ul class="track-popup">
+<div class="track-popup ">
 	<span>Tracklist</span>
-	<span id="close">X</span>
-</ul>
+	<span id="close-button">X</span>
+	<ul id="popup-list"></ul>
+</div>
 <div class="header list-display">
 	<% newReleases.forEach(function(album){ %>
 		<div class="song-box">

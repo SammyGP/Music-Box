@@ -1,12 +1,12 @@
 console.log("Hello scripts are loaded");
 
 
-// TODO add the data to session storage
+// TODO add the data AND acces/refresh token to session storage
 // so that i dont need to call the backend api every request
 
-var getUserTracks = function(userId, listId) {
-//		sessionStorage.setItem(listId, userId);
 
+// get the tracks from user playlists function
+var getUserTracks = function(userId, listId) {
 
 	// check if list already exists in session storage
 	if(sessionStorage.getItem(listId)) {
@@ -28,16 +28,38 @@ var getUserTracks = function(userId, listId) {
 			console.log(data.tracks.items);
 			data = data.tracks.items;
 
-			var container = document.querySelector(".track-popup");
+			// removes the hidden class so the list is displayed
+			document.querySelector(".track-popup").classList.remove("hidden");
 
+			var container = document.getElementById("popup-list");
+
+			// clear the container before appending to make sure new stuff dont get added everytime you click
+			// checks if list container has childnodes and deletes them while it has
+			if(container.hasChildNodes()){
+				while(container.hasChildNodes()) {
+
+					// always selects the first li it encounters
+					var rm = container.querySelector("li");
+					container.removeChild(rm);
+				}
+			}
+
+			// populates the list (again if selecting new one)
 			data.forEach(function(item){
 				var li = document.createElement("li");
+
+				// TODO 
+				// currently only displays the first artist, make sure all artist in the artists[] array are displayed
+
 				li.innerHTML = item.track.artists[0].name  + " - " + item.track.name;
+				li.style.display = "block";
 				container.appendChild(li);
 			})
 
 			// TODO 
 			// create the container "popup" window that contains all the trackslist for the user to views what the playlist contains
+			var display = document.querySelector(".track-popup").style.display = "block";
+			container.style.display = "block";
 
 		})
 }
@@ -98,6 +120,14 @@ window.addEventListener("click", function(e){
 
 	*/
 });
+
+
+
+var closeButton = document.getElementById("close-button");
+closeButton.onclick = function(){
+	document.querySelector(".track-popup").classList.add("hidden")
+}
+
 
 // gets all the users playlists from the server
 var getUserPlaylistButton = document.getElementById("get-playlists");
