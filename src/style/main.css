@@ -59,7 +59,7 @@
   z-index: 100;
   margin: auto;
   width: 66%;
-  height: auto;
+  height: 80vh;
   background-color: black;
   color: red;
   list-style: none; }
@@ -72,10 +72,16 @@
   .track-popup span, #popup-list span {
     text-align: center;
     margin: auto; }
+  .track-popup li, #popup-list li {
+    padding: 5px;
+    border: 1px solid red;
+    margin: 5px; }
 
 #popup-list {
   width: 100%;
-  padding: 0; }
+  padding: 0;
+  margin-top: 3%;
+  overflow: scroll; }
 
 .hidden {
   display: none !important; }

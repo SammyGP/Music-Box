@@ -72,7 +72,7 @@
 	z-index:100;
 	margin:auto;
 	width:66%;
-	height:auto;
+	height:80vh;
 	background-color:black;
 	color:red;
 	list-style:none;
@@ -87,10 +87,19 @@
 		text-align:center;
 		margin:auto;
 	}
+	// the list items
+	li {
+		padding:5px;
+		border:1px solid red;
+		margin:5px;
+	}
 }
+// the ul list container
 #popup-list {
 	width:100%;
 	padding:0;
+	margin-top:3%;
+	overflow:scroll;
 }
 .hidden {
 	display:none !important;

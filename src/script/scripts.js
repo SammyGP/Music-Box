@@ -31,6 +31,7 @@ var getUserTracks = function(userId, listId) {
 			// removes the hidden class so the list is displayed
 			document.querySelector(".track-popup").classList.remove("hidden");
 
+
 			var container = document.getElementById("popup-list");
 
 			// clear the container before appending to make sure new stuff dont get added everytime you click
@@ -69,6 +70,7 @@ window.addEventListener("click", function(e){
 
 	console.log(e);
 
+	// populate the user playlists with the tracks
 	if(e.path[1].className === "user-playlist") {
 		var userId = e.path[1].dataset.userId;
 		var listId = e.path[1].dataset.listId
@@ -78,7 +80,11 @@ window.addEventListener("click", function(e){
 
 
 
-
+	// function to remove the popup if clicking anywhere on the screen except the li item in the popup
+	var popupContainer = document.querySelector(".track-popup");
+	if(popupContainer.classList[1] !== "hidden" && e.target.localName !== "li") {
+		popupContainer.classList.add("hidden")
+	}
 
 
 
