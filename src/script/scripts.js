@@ -21,6 +21,7 @@ var getUserTracks = function(userId, listId) {
 		var request = new Request(`http://localhost:3000/playlist/${userId}/${listId}`);
 		fetch(request)
 		.then(function(response){
+			document.querySelector("body").style.opacity = 0.1;
 			return response.json();
 		})
 		.then(function(data){
@@ -62,6 +63,11 @@ var getUserTracks = function(userId, listId) {
 			var display = document.querySelector(".track-popup").style.display = "block";
 			container.style.display = "block";
 
+		}).then(function(){
+
+			// moves the user to the top of the window
+			document.querySelector("body").scrollIntoView({behavior: "smooth", block: "start"});
+			document.querySelector("body").style.opacity = 1.0;
 		})
 }
 
@@ -152,6 +158,7 @@ getUserPlaylistButton.addEventListener("click", function(e){
 		data.forEach(function(item){
 			var container = document.querySelector(".user-playlists");
 			var div = document.createElement("div");
+
 			div.classList.add("user-playlist");
 			var img = document.createElement("img");
 

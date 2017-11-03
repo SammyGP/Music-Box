@@ -24,7 +24,7 @@
     width: 100%;
     height: auto; }
 
-/* user playlists */
+/* user playlists display style */
 .user-playlists {
   width: 100%;
   height: 50vh;
@@ -52,6 +52,7 @@
     margin-top: 50%;
     z-index: 100; }
 
+/* popup list style */
 .track-popup, #popup-list {
   position: absolute;
   left: 0;
@@ -69,9 +70,16 @@
     padding: 5px;
     margin: 5px;
     border: 1px solid red; }
-  .track-popup span, #popup-list span {
-    text-align: center;
-    margin: auto; }
+  .track-popup form, #popup-list form {
+    width: 100%; }
+    .track-popup form span, .track-popup form h2, .track-popup form p, #popup-list form span, #popup-list form h2, #popup-list form p {
+      display: inline-block; }
+    .track-popup form h2, #popup-list form h2 {
+      text-align: center;
+      margin: auto; }
+    .track-popup form p, #popup-list form p {
+      margin: auto;
+      border: 1px solid red; }
   .track-popup li, #popup-list li {
     padding: 5px;
     border: 1px solid red;
