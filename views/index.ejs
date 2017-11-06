@@ -10,10 +10,10 @@
 <div class="track-popup hidden ">
 	<form action="/convert" method="post">
 		<h2>Tracklist</h2>
-		<p id="submit">Submit this playlist</p>
+		<input type="submit"><p id="submit">Submit this playlist</p>
 		<span id="close-button">X</span>
+		<ul id="popup-list"></ul>
 	</form>
-	<ul id="popup-list"></ul>
 </div>
 <div class="header list-display">
 	<% newReleases.forEach(function(album){ %>

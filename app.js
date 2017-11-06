@@ -107,6 +107,10 @@ app.get("/user/playlist", function(req, res){
 app.get("/convert", function(req, res){
 	res.send("convert!!!");
 })
+app.post("/convert", function(req, res){
+	console.log(req.body);
+	res.redirect("/convert");
+});
 
 
 

@@ -54,7 +54,16 @@ var getUserTracks = function(userId, listId) {
 				// currently only displays the first artist, make sure all artist in the artists[] array are displayed
 
 				li.innerHTML = item.track.artists[0].name  + " - " + item.track.name;
+				li.dataset.artist = item.track.artists[0].name;
+				li.dataset.track = item.track.name;
 				li.style.display = "block";
+
+				var value = document.createElement("input");
+				value.name = item.track.artists[0].name;
+				value.value = item.track.name;
+				value.type = "hidden";
+				li.appendChild(value);
+
 				container.appendChild(li);
 			})
 
