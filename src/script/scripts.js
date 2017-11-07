@@ -59,8 +59,8 @@ var getUserTracks = function(userId, listId) {
 				li.style.display = "block";
 
 				var value = document.createElement("input");
-				value.name = item.track.artists[0].name;
-				value.value = item.track.name;
+				value.name = "search_query";
+				value.value = item.track.artists[0].name + " " + item.track.name;
 				value.type = "hidden";
 				li.appendChild(value);
 

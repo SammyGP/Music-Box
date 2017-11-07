@@ -5,6 +5,7 @@ app 		   	= express(),
 request			= require("request"),
 auth 			= require("./auth"),
 authRouter		= auth.router,
+rp 				= require("request-promise"),
 
 // not vialbe for release to have tokens like this
 // look inte pushing token to front end?
@@ -90,6 +91,7 @@ app.get("/playlist/:user/:id", function(req, res){
 	})
 });
 
+// JSON of user playlists track
 app.get("/user/playlist", function(req, res){
 	var userPlaylist = {
 		url: "https://api.spotify.com/v1/me/playlists?",
@@ -107,9 +109,58 @@ app.get("/user/playlist", function(req, res){
 app.get("/convert", function(req, res){
 	res.send("convert!!!");
 })
+
+// spotify playlist submission
 app.post("/convert", function(req, res){
-	console.log(req.body);
-	res.redirect("/convert");
+
+	// posts the search_query object containing a string for each artist and song
+
+
+	//
+	// TODO fix the post request
+	// i get the data but now i need to figure out how to DISPLAY the data to the user
+	//
+
+	var spotifyList = req.body;
+	if(!spotifyList) {
+		console.log("something went wrong");
+	} else {
+		console.log(spotifyList.search_query);
+		console.log(spotifyList.search_query[0]);
+
+		var data = [];
+		var counter = 0;
+
+
+		// the for loops request the youtube api every iteration 
+		// when the request is done (it returns a promise) and adds to the counter
+		// when the counter is bigger than the list its renders the page with all the data
+		/*
+			PROBLEM due the async nature of request i cant do a conventional counter due the fact
+			that a normal counter and for loop will count up while the request data is still handled
+			with the .then() i make sure each request is finished before i add to the counter and render the new page
+		*/
+		for (i=0, j=spotifyList.search_query.length; i <= j; i++) {
+
+			rp(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${KEYS.YOUTUBE_KEY}&q=${spotifyList.search_query[i]}`, 
+			function(error, response, body){
+
+				var result = JSON.parse(body);
+				result = result.items[0];
+				data.push(result);
+			}).then(function(){
+
+				counter++;
+				if(counter > j) {
+					console.log("all the data done");
+					console.log(data);
+					//res.send(data);
+					res.render("results", {data: data});
+				}
+			})
+
+		}
+	}
 });
 
 
