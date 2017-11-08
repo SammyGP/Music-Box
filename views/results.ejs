@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="./style/main.css">
+	<title>Music Box</title>
+</head>
+<body>
+	<h1>Results</h1>
+	<form action="/playback" method="POST">
+		<input type="submit" value="looks good sumbit">
+		<% data.forEach(function(item){ %>
+			<h2><%= item.snippet.title %></h2>
+			<input type="hidden" name="videoId" value="<%= item.id.videoId %>" />
+			<p><%= item.id.videoId %></p>
+			<img src="<%= item.snippet.thumbnails.default.url %>"  alt ="<%= item.snippet.title %>"/>
+
+		<% }) %>
+	</form>
+</body>

@@ -125,8 +125,6 @@ app.post("/convert", function(req, res){
 	if(!spotifyList) {
 		console.log("something went wrong");
 	} else {
-		console.log(spotifyList.search_query);
-		console.log(spotifyList.search_query[0]);
 
 		var data = [];
 		var counter = 0;
@@ -153,7 +151,6 @@ app.post("/convert", function(req, res){
 				counter++;
 				if(counter > j) {
 					console.log("all the data done");
-					console.log(data);
 					//res.send(data);
 					res.render("results", {data: data});
 				}
@@ -163,7 +160,18 @@ app.post("/convert", function(req, res){
 	}
 });
 
+// VIDEO playback
+app.post("/playback", function(req, res){
+	var data = req.body;
+	//data = JSON.stringify(data);
+	app.set("videoIds", data)
+	res.render("video");
+})
 
+app.get("/playback/json", function(req, res){
+	var data = app.get("videoIds");
+	res.json(data);
+})
 
 // temporary endpoint just to view the json data
 app.get("/data", function(req, res){
