@@ -6,6 +6,7 @@ request			= require("request"),
 auth 			= require("./auth"),
 authRouter		= auth.router,
 rp 				= require("request-promise"),
+cookieSession	= require("cookie-session")
 
 // not vialbe for release to have tokens like this
 // look inte pushing token to front end?
@@ -128,7 +129,8 @@ app.post("/convert", function(req, res){
 
 		var data = [];
 		var counter = 0;
-
+		console.log(typeof spotifyList.search_query);
+		console.log(spotifyList.search_query);
 
 		// the for loops request the youtube api every iteration 
 		// when the request is done (it returns a promise) and adds to the counter
@@ -138,25 +140,56 @@ app.post("/convert", function(req, res){
 			that a normal counter and for loop will count up while the request data is still handled
 			with the .then() i make sure each request is finished before i add to the counter and render the new page
 		*/
-		for (i=0, j=spotifyList.search_query.length; i <= j; i++) {
 
-			rp(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${KEYS.YOUTUBE_KEY}&q=${spotifyList.search_query[i]}`, 
+		spotifyList.search_query.forEach(function(item){
+			rp(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${KEYS.YOUTUBE_KEY}&q=${item}`, 
 			function(error, response, body){
-
-				var result = JSON.parse(body);
-				result = result.items[0];
-				data.push(result);
+				if(response.statusCode === 200) {
+					console.log(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${KEYS.YOUTUBE_KEY}&q=${item}`);
+					var result = JSON.parse(body);
+					result = result.items[0];
+					data.push(result);
+				} else if (response.statusCode === 400) {
+					console.log("Error statuscode 400");
+					var result = item + " Song not found";
+					data.push(result);
+				}
 			}).then(function(){
-
+				console.log(data.length);
+				console.log(spotifyList.search_query.length);
 				counter++;
-				if(counter > j) {
+				if(data.length === spotifyList.search_query.length) {
 					console.log("all the data done");
 					//res.send(data);
 					res.render("results", {data: data});
+					counter = 0;
 				}
 			})
+		})
 
+/*
+		for (var i = 0; i < spotifyList.search_query.length; i++) {
+
+			rp(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${KEYS.YOUTUBE_KEY}&q=${spotifyList.search_query[counter]}`, 
+			function(error, response, body){
+				var result = JSON.parse(body);
+				console.log(result);
+				result = result.items[0];
+				data.push(result);
+			}).then(function(){
+				counter++;
+				if(counter === spotifyList.search_query.length) {
+					console.log("all the data done");
+					//res.send(data);
+					res.render("results", {data: data});
+					counter = 0;
+				}
+			}).catch(function(err){
+				console.log("ERROR");
+				console.log(err);
+			})
 		}
+*/
 	}
 });
 
