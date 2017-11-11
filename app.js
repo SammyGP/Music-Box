@@ -193,6 +193,15 @@ app.post("/convert", function(req, res){
 	}
 });
 
+// search youtube for query endpoint
+app.get("/convert/:id", function(req, res){
+	rp(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${KEYS.YOUTUBE_KEY}&q=${req.params.id}`)
+	.then(function(response){
+		console.log("someone requested" + req.params.id);
+		res.json(response);
+	})
+})
+
 // VIDEO playback
 app.post("/playback", function(req, res){
 	var data = req.body;

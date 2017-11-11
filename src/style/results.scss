@@ -1,0 +1,26 @@
+.video-container {
+	border:1px solid black;
+	height:100%;
+	max-height: 90px;
+	width:100%;
+	margin:5px;
+	img {
+		width:100%;
+		max-width: 120px;
+		height:100%;
+		max-height: 90px;
+		margin:0;
+		padding:0;
+		display:inline-block;
+	}
+	h2 {
+		display:inline-block;
+		overflow:hidden;
+	}
+	div {
+		float:right;
+	}
+}
+.video-container:hover {
+	outline: 4px solid red;
+}

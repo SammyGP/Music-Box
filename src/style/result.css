@@ -1,0 +1,24 @@
+.video-container {
+  border: 1px solid black;
+  height: 100%;
+  max-height: 90px;
+  width: 100%;
+  margin: 5px; }
+  .video-container img {
+    width: 100%;
+    max-width: 120px;
+    height: 100%;
+    max-height: 90px;
+    margin: 0;
+    padding: 0;
+    display: inline-block; }
+  .video-container h2 {
+    display: inline-block;
+    overflow: hidden; }
+  .video-container div {
+    float: right; }
+
+.video-container:hover {
+  outline: 4px solid red; }
+
+/*# sourceMappingURL=result.css.map */
