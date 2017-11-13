@@ -1,0 +1,40 @@
+
+/* popup list style */
+.track-popup, #popup-list {
+	position:absolute;
+	left:0;
+	right:0;
+	z-index:100;
+	margin:auto;
+	padding:0;
+	width:66%;
+	height:100%;
+	background-color:black;
+	color:red;
+	list-style:none;
+	form {
+		width:100%;
+		span, h2, p {
+		display:inline-block;
+		}
+		h2 {
+			text-align:center;
+			margin:auto;
+		}
+		p {
+			margin:auto;
+			border:1px solid red;
+		}
+	}
+	
+	// the list items
+	li {
+		padding:5px;
+		border:1px solid red;
+		margin:5px;
+		p {
+			float:right;
+			display:inline-block;
+		}
+	}
+}

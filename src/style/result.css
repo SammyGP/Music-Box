@@ -1,3 +1,34 @@
+/* popup list style */
+.track-popup, #popup-list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  margin: auto;
+  padding: 0;
+  width: 66%;
+  height: 100%;
+  background-color: black;
+  color: red;
+  list-style: none; }
+  .track-popup form, #popup-list form {
+    width: 100%; }
+    .track-popup form span, .track-popup form h2, .track-popup form p, #popup-list form span, #popup-list form h2, #popup-list form p {
+      display: inline-block; }
+    .track-popup form h2, #popup-list form h2 {
+      text-align: center;
+      margin: auto; }
+    .track-popup form p, #popup-list form p {
+      margin: auto;
+      border: 1px solid red; }
+  .track-popup li, #popup-list li {
+    padding: 5px;
+    border: 1px solid red;
+    margin: 5px; }
+    .track-popup li p, #popup-list li p {
+      float: right;
+      display: inline-block; }
+
 .video-container {
   border: 1px solid black;
   height: 100%;
